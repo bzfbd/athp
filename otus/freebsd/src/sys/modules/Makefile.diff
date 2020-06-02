@@ -1,0 +1,13 @@
+diff --git a/sys/modules/Makefile b/sys/modules/Makefile
+index 4043ee54a873..75793a6b63d9 100644
+--- a/sys/modules/Makefile
++++ b/sys/modules/Makefile
+@@ -58,6 +58,8 @@ SUBDIR=	\
+ 	ath_main \
+ 	ath_rate \
+ 	ath_pci \
++	athp \
++	athpfw \
+ 	${_autofs} \
+ 	${_bce} \
+ 	${_bcm283x_clkman} \
