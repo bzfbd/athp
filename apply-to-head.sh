@@ -55,13 +55,19 @@ if test ! -d ${DPATH}/sys/modules/athpfw; then
 else
 	printf "INFO: found modules/athpfw; skipping\n" >&2
 fi
+if test ! -d ${DPATH}/sys/contrib/dev/athp; then
+	cp -pr otus/freebsd/src/sys/contrib/dev/athp ${DPATH}sys/contrib/dev/
+else
+	printf "INFO: found contrib/dev/athp; skipping\n" >&2
+fi
 
-patch -d ${DPATH} -s -p1 < otus/freebsd/src/sys/modules/Makefile.diff
+patch -d ${DPATH} -C -s -p1 < otus/freebsd/src/sys/modules/Makefile.diff
 rc=$?
 case ${rc} in
-0)	rm -f ${DPATH}/sys/modules/Makefile.orig
+0)	patch -d ${DPATH} -s -p1 < otus/freebsd/src/sys/modules/Makefile.diff
+	rm -f ${DPATH}/sys/modules/Makefile.orig
 	;;
-*)	printf "WARNING: patch for modules did not apply cleanly. Please fix!" >&2
+*)	printf "WARNING: patch for modules does not apply cleanly. Please fix!" >&2
 	;;
 esac
 
